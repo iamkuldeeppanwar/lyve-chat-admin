@@ -7,7 +7,7 @@ import {
   InputGroup,
   Table,
 } from "react-bootstrap";
-import { getAllEvents } from "../../states/actions";
+
 import { reducer } from "../../states/reducers";
 // import { ColorRing } from "react-loader-spinner";
 import { Store } from "../../states/store";

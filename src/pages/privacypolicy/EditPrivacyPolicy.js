@@ -1,7 +1,7 @@
-import React, { useEffect, useReducer, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Store } from "../../states/store";
 import { getError } from "../../utils/error.js";
-import { reducer } from "../../states/reducers";
+// import { reducer } from "../../states/reducers";
 // import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Button, Spinner } from "react-bootstrap";
@@ -19,10 +19,10 @@ export default function EditPrivacyPolicyModel(props) {
   const [load, setLoad] = useState(false);
   // const [text, setText] = useState("");
 
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: "",
-  });
+  // const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+  //   loading: true,
+  //   error: "",
+  // });
 
   const modules = {
     toolbar: [

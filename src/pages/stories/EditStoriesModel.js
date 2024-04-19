@@ -13,12 +13,12 @@ import { LoadingBox } from "../../components";
 
 export default function EditStoriesModel(props) {
   const navigate = useNavigate();
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const { token, event } = state;
   const { id } = useParams(); // category/:id
   const [load, setLoad] = useState(false);
 
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+  const [{ loadingUpdate }] = useReducer(reducer, {
     loading: true,
     error: "",
   });
@@ -56,7 +56,7 @@ export default function EditStoriesModel(props) {
   // const [theme, setTheme] = useState("");
   // const [description, setDescription] = useState("");
 
-  const time = new Date(eventTime);
+  // const time = new Date(eventTime);
 
   useEffect(() => {
     setTitle(event?.title ? event.title : "");

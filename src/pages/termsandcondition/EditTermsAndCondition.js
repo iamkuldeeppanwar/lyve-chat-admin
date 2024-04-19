@@ -1,8 +1,8 @@
-import React, { useEffect, useReducer, useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Store } from "../../states/store";
 import { getError } from "../../utils/error.js";
-import { reducer } from "../../states/reducers";
-import { useParams } from "react-router-dom";
+// import { reducer } from "../../states/reducers";
+// import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Button, Spinner } from "react-bootstrap";
 
@@ -15,12 +15,12 @@ import "react-quill/dist/quill.snow.css";
 export default function EditTermsAndConditionModel(props) {
   const { state } = useContext(Store);
   const { token, termsAndCondition } = state;
-  const { id } = useParams(); // category/:id
+  // const { id } = useParams(); // category/:id
   const [load, setLoad] = useState(false);
-  const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
-    loading: true,
-    error: "",
-  });
+  // const [{ loading, error, loadingUpdate }, dispatch] = useReducer(reducer, {
+  //   loading: true,
+  //   error: "",
+  // });
 
   const [content, setContent] = useState("");
 

@@ -16,7 +16,7 @@ const ViewProfile = () => {
   const { state } = useContext(Store);
   const { userInfo } = state;
   const [modalShow, setModalShow] = useState(false);
-  const [{ loading, error }, dispatch] = useReducer(reducer, {
+  const [{ loading, error }] = useReducer(reducer, {
     loading: false,
     error: "",
   });

@@ -20,7 +20,7 @@ export default function UpdateProfileModel(props) {
   const [mobile_no, setMobileNo] = useState("");
 
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-  const [{ loading, error }, dispatch] = useReducer(reducer, {
+  const [dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
@@ -126,7 +126,7 @@ export default function UpdateProfileModel(props) {
           },
         }
       );
-      console.log(data);
+      // console.log(data);
 
       if (data.success) {
         toast.success("Admin Profile Updated Successfully.", {

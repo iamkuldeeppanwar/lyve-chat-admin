@@ -31,7 +31,7 @@ const Dashboard = () => {
     "/stories",
     "/stories",
   ];
-  const [{ loading, error }, dispatch] = useReducer(reducer, {
+  const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
     error: "",
   });

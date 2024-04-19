@@ -17,7 +17,7 @@ import { getSingleEvent, getStreamedDetails } from "../../states/actions.js";
 const ViewStories = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { token, event, streamDetails } = state;
-  const { id, status } = useParams(); // category/:id
+  const { id } = useParams(); // category/:id
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
