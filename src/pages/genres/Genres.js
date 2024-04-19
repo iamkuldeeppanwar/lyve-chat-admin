@@ -77,6 +77,8 @@ export default function Genres() {
     }
   };
 
+  // console.log(genreLength);
+
   return (
     <motion.div
       initial={{ x: "-100%" }}
@@ -122,7 +124,12 @@ export default function Genres() {
             </Card.Header>
             <Card.Body>
               <Table
-                style={{ height: "500px", overflowY: "scroll" }}
+                style={
+                  genreLength > 1
+                    ? { height: "500px", overflowY: "scroll" }
+                    : { height: "200px", overflowY: "scroll" }
+                }
+                // style={{ height: "500px", overflowY: "scroll" }}
                 responsive
                 striped
                 bordered

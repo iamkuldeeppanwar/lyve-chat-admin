@@ -186,7 +186,12 @@ export default function Stories() {
             </Card.Header>
             <Card.Body>
               <Table
-                style={{ height: "500px", overflowY: "scroll" }}
+                style={
+                  eventsLength > 1
+                    ? { height: "500px", overflowY: "scroll" }
+                    : { height: "200px", overflowY: "scroll" }
+                }
+                // style={{ height: "500px", overflowY: "scroll" }}
                 responsive
                 striped
                 bordered

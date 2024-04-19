@@ -2,7 +2,7 @@ import "./SideNavBar.css";
 import React, { useContext, useState } from "react";
 import { Store } from "../../states/store";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../../utils/creativestory.svg";
+import logo from "../../utils/Group 581.svg";
 import { MdEmojiEvents, MdPrivacyTip } from "react-icons/md";
 import { RiFileList2Line } from "react-icons/ri";
 import { FaSignOutAlt } from "react-icons/fa";
@@ -108,11 +108,11 @@ export default function SideNavbar({ isExpanded }) {
           }
         >
           <div className="brand-link">
-            <Link to="/admin/dashboard">
+            <Link to="/admin/dashboard" className="d-flex align-items-center">
               <img
                 src={logo}
                 alt=""
-                style={{ width: "50px", cursor: "pointer" }}
+                style={{ width: "50px", cursor: "pointer", marginTop: "10px" }}
                 height="50px"
               />
               <span

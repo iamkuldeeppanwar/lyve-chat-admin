@@ -112,7 +112,6 @@ export default function Users() {
                   <InputGroup.Text
                     style={{ cursor: "pointer" }}
                     onClick={() => {
-                      // console.log("okkkkkkkk")
                       setQuery(searchInput);
                       setCurPage(1);
                     }}
@@ -124,7 +123,12 @@ export default function Users() {
             </Card.Header>
             <Card.Body>
               <Table
-                style={{ height: "500px", overflowY: "scroll" }}
+                style={
+                  userLength > 1
+                    ? { height: "500px", overflowY: "scroll" }
+                    : { height: "200px", overflowY: "scroll" }
+                }
+                // style={{ height: "500px", overflowY: "scroll" }}
                 responsive
                 striped
                 bordered
@@ -133,20 +137,18 @@ export default function Users() {
                 <thead>
                   <tr>
                     <th>S.no</th>
-                    {/* <th>Name</th> */}
                     <th>Username</th>
-                    <th>avatar</th>
+                    <th>Profile</th>
                     <th>Email</th>
                     <th>Gender</th>
                     <th>Mobile.no</th>
                     <th>Country</th>
-                    {/* <th>Type</th> */}
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {loading ? (
-                    <CustomSkeleton resultPerPage={5} column={6} />
+                    <CustomSkeleton resultPerPage={5} column={8} />
                   ) : (
                     users.length > 0 &&
                     users.map((user, i) => (
@@ -169,8 +171,6 @@ export default function Users() {
                         <td>{user.gender}</td>
                         <td>{user.mobile_no}</td>
                         <td>{user.country}</td>
-
-                        {/* <td>{user.type}</td> */}
                         <td>
                           <Button
                             onClick={() => {
