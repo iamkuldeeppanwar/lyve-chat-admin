@@ -145,13 +145,14 @@ export default function Banners() {
                     banners.map((banner, i) => (
                       <tr key={i} className="odd">
                         <td className="text-center">{skip + i + 1}</td>
-                        <td style={{textAlign:"center"}}>
+                        <td style={{ textAlign: "center" }}>
                           <img
+                            alt=""
                             style={{
                               width: "140px",
                               height: "120px",
-                              cursor:"pointer",
-                              borderRadius:"10px"
+                              cursor: "pointer",
+                              borderRadius: "10px",
                             }}
                             src={banner.bannerUrl}
                           />

@@ -68,11 +68,21 @@ const ViewBanner = () => {
                         <p className="mb-0">
                           <strong>Banner</strong>
                         </p>
-                        <p >
+                        <p>
                           {loading ? (
                             <Skeleton />
                           ) : (
-                            <img className="" style={{width:"100%",height:"120px",cursor:"pointer",borderRadius:"12px"}} src={banner.bannerUrl} />
+                            <img
+                              className=""
+                              alt=""
+                              style={{
+                                width: "100%",
+                                height: "120px",
+                                cursor: "pointer",
+                                borderRadius: "12px",
+                              }}
+                              src={banner.bannerUrl}
+                            />
                           )}
                         </p>
                       </Col>

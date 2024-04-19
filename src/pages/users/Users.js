@@ -156,6 +156,7 @@ export default function Users() {
                         <td>{user.username}</td>
                         <td>
                           <img
+                            alt=""
                             style={{
                               borderRadius: "100%",
                               width: "50px",
