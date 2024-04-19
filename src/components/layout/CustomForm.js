@@ -1,22 +1,30 @@
 /**
-* @file This file contains reusable form components and a custom form component.
-* The custom form component renders a form with various input fields based on the provided props.
-* It also handles form submission, displays success and error messages, and redirects after successful        submission.
-* The file exports the custom form component and other form input components.
-* @requires React
-* @requires react-bootstrap
-* @requires react-toastify
-* @requires react-router-dom
-*/
+ * @file This file contains reusable form components and a custom form component.
+ * The custom form component renders a form with various input fields based on the provided props.
+ * It also handles form submission, displays success and error messages, and redirects after successful        submission.
+ * The file exports the custom form component and other form input components.
+ * @requires React
+ * @requires react-bootstrap
+ * @requires react-toastify
+ * @requires react-router-dom
+ */
 
-import React, { useEffect } from 'react'
-import { Card, Col, Form, Row, Spinner, Button, Modal, Container } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
-import { toastOptions } from '../../utils/error';
-import { clearErrors } from '../../states/actions';
-import { useNavigate } from 'react-router-dom';
-import MotionDiv from './MotionDiv';
-import SubmitButton from './SubmitButton';
+import React, { useEffect } from "react";
+import {
+  Card,
+  Col,
+  Form,
+  Row,
+  Button,
+  Modal,
+  Container,
+} from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import { toastOptions } from "../../utils/error";
+import { clearErrors } from "../../states/actions";
+import { useNavigate } from "react-router-dom";
+import MotionDiv from "./MotionDiv";
+import SubmitButton from "./SubmitButton";
 
 /**
  * Text input component for the form.
@@ -38,8 +46,8 @@ const TextInput = (props) => {
       {props.label && <Form.Label>{props.label}</Form.Label>}
       <Form.Control {...props} />
     </Form.Group>
-  )
-}
+  );
+};
 
 /**
  * Checkbox input component for the form.
@@ -59,12 +67,9 @@ const CheckInput = (props) => {
   return (
     <Form.Group className="mb-3">
       {props.checklabel && <Form.Label>{props.checklabel}</Form.Label>}
-      <Form.Check className='checkbox'
-        type='checkbox'
-        {...props}
-      />
+      <Form.Check className="checkbox" type="checkbox" {...props} />
     </Form.Group>
-  )
+  );
 };
 
 /**
@@ -84,12 +89,9 @@ const RadioInput = (props) => {
   return (
     <Form.Group className="mb-3">
       {props.labelAbove && <Form.Label>{props.labelAbove}</Form.Label>}
-      <Form.Check
-        type='radio'
-        {...props}
-      />
+      <Form.Check type="radio" {...props} />
     </Form.Group>
-  )
+  );
 };
 
 /**
@@ -115,11 +117,7 @@ const SelectInput = (props) => {
   return (
     <Form.Group className={grpStyle}>
       {props.label && <Form.Label className="mr-3">{props.label}</Form.Label>}
-      <Form.Select
-        aria-label="Select Option"
-        aria-controls="option"
-        {...props}
-      >
+      <Form.Select aria-label="Select Option" aria-controls="option" {...props}>
         <option key="blankChoice" hidden value>
           {props.placeholder}
         </option>
@@ -131,12 +129,11 @@ const SelectInput = (props) => {
                 {v}
               </option>
             );
-          })
-        }
+          })}
       </Form.Select>
     </Form.Group>
-  )
-}
+  );
+};
 
 /**
  * Custom form component that renders a form with input fields.
@@ -213,17 +210,20 @@ const EditForm = (props) => {
       toast.success(successMessage, toastOptions);
       setTimeout(() => {
         if (target) navigate(target);
-        else { props.onHide(); props.reload(); };
+        else {
+          props.onHide();
+          props.reload();
+        }
       }, 3000);
     }
-  }, [success]);
+  }, [success, navigate, props, successMessage, target]);
 
   useEffect(() => {
     if (error) {
       toast.error(error, toastOptions);
       clearErrors(dispatch);
     }
-  }, [error]);
+  }, [error, dispatch]);
   toast.warning("dfdf", toastOptions);
   return (
     <Modal
@@ -248,31 +248,40 @@ const EditForm = (props) => {
                       <Col key={props.name} md={col}>
                         <CheckInput
                           {...props}
-                          onChange={(e) => setData({ ...data, [props.name]: e.target.checked })}
+                          onChange={(e) =>
+                            setData({ ...data, [props.name]: e.target.checked })
+                          }
                           checked={data[props.name]}
                         />
                       </Col>
-                    )
+                    );
                   case "select":
                     return (
                       <Col key={props.name} md={col}>
                         <SelectInput
                           {...props}
-                          onChange={(e) => setData({ ...data, [props.name]: e.target.value })}
+                          onChange={(e) =>
+                            setData({ ...data, [props.name]: e.target.value })
+                          }
                           value={data[props.name]}
                         />
                       </Col>
-                    )
+                    );
                   default:
                     return (
                       <Col key={props.name} md={col}>
                         <TextInput
                           {...props}
-                          onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
+                          onChange={(e) =>
+                            setData({
+                              ...data,
+                              [e.target.name]: e.target.value,
+                            })
+                          }
                           value={data[props.name]}
                         />
                       </Col>
-                    )
+                    );
                 }
               })}
             </Row>
@@ -280,14 +289,22 @@ const EditForm = (props) => {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={props.onHide}>Close</Button>
-          <SubmitButton variant="success" loading={loadingUpdate} disabled={loadingUpdate || success}>Submit</SubmitButton>
+          <Button variant="danger" onClick={props.onHide}>
+            Close
+          </Button>
+          <SubmitButton
+            variant="success"
+            loading={loadingUpdate}
+            disabled={loadingUpdate || success}
+          >
+            Submit
+          </SubmitButton>
         </Modal.Footer>
       </Form>
       <ToastContainer />
     </Modal>
-  )
-}
+  );
+};
 
 const AddForm = (props) => {
   // console.log({ props });
@@ -311,9 +328,11 @@ const AddForm = (props) => {
   useEffect(() => {
     if (success) {
       toast.success(successMessage, toastOptions);
-      setTimeout(() => { navigate(target); }, 2000);
+      setTimeout(() => {
+        navigate(target);
+      }, 2000);
     }
-  }, [success]);
+  }, [success, navigate, successMessage, target]);
 
   useEffect(() => {
     if (error) {
@@ -321,7 +340,7 @@ const AddForm = (props) => {
       toast.error(error, toastOptions);
       clearErrors(dispatch);
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   return (
     <MotionDiv>
@@ -348,48 +367,74 @@ const AddForm = (props) => {
                           <Col key={props.name} md={col}>
                             <CheckInput
                               {...props}
-                              onChange={(e) => setData({ ...data, [props.name]: e.target.checked })}
+                              onChange={(e) =>
+                                setData({
+                                  ...data,
+                                  [props.name]: e.target.checked,
+                                })
+                              }
                               value={data[props.name]}
                             />
                           </Col>
-                        )
+                        );
                       case "radio":
                         return (
                           <Col key={props.name} md={col}>
                             <RadioInput
                               {...props}
-                              onChange={(e) => setData({ ...data, [props.name]: e.target.checked })}
+                              onChange={(e) =>
+                                setData({
+                                  ...data,
+                                  [props.name]: e.target.checked,
+                                })
+                              }
                               value={data[props.name]}
                             />
                           </Col>
-                        )
+                        );
                       case "select":
                         return (
                           <Col key={props.name} md={col}>
                             <SelectInput
                               {...props}
-                              onChange={(e) => setData({ ...data, [props.name]: e.target.value })}
+                              onChange={(e) =>
+                                setData({
+                                  ...data,
+                                  [props.name]: e.target.value,
+                                })
+                              }
                               value={data[props.name]}
                             />
                           </Col>
-                        )
+                        );
                       default:
                         return (
                           <Col key={props.name} md={col}>
                             <TextInput
                               {...props}
-                              onChange={(e) => setData({ ...data, [e.target.name]: e.target.value })}
+                              onChange={(e) =>
+                                setData({
+                                  ...data,
+                                  [e.target.name]: e.target.value,
+                                })
+                              }
                               value={data[props.name]}
                             />
                           </Col>
-                        )
+                        );
                     }
                   })}
                 </Row>
                 {children}
               </Card.Body>
               <Card.Footer>
-                <SubmitButton variant='success' loading={loading} disabled={disabled}>Submit</SubmitButton>
+                <SubmitButton
+                  variant="success"
+                  loading={loading}
+                  disabled={disabled}
+                >
+                  Submit
+                </SubmitButton>
               </Card.Footer>
             </Form>
           </Card>
@@ -397,7 +442,7 @@ const AddForm = (props) => {
       </Row>
       <ToastContainer />
     </MotionDiv>
-  )
-}
+  );
+};
 
 export { AddForm, EditForm, TextInput, CheckInput, RadioInput, SelectInput };

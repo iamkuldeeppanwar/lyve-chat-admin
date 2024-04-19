@@ -1,18 +1,18 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useReducer, useState } from "react";
 import {
   Button,
   Card,
   Container,
-  Form,
-  InputGroup,
+  // Form,
+  // InputGroup,
   Table,
 } from "react-bootstrap";
 
 import { reducer } from "../../states/reducers";
 // import { ColorRing } from "react-loader-spinner";
 // import { Store } from "../../states/store";
-import { CustomPagination, CustomSkeleton, MessageBox } from "../../components";
-import { FaSearch, FaTrashAlt } from "react-icons/fa";
+import { CustomSkeleton, MessageBox } from "../../components";
+import { FaTrashAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 // import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -20,21 +20,21 @@ import { getError } from "../../utils/error";
 import axiosInstance from "../../utils/axiosUtil";
 
 const Transaction = () => {
-  const { state } = useContext();
+  // const { state } = useContext();
   // const navigate = useNavigate();
-  const { eventsLength } = state;
+  // const { eventsLength } = state;
   // const [status, setStatus] = useState("");
-  const [curPage, setCurPage] = useState(1);
-  const [searchInput, setSearchInput] = useState("");
-  const [setQuery] = useState("");
-  const [resultPerPage, setResultPerPage] = useState(5);
-  const curPageHandler = (p) => setCurPage(p);
-  const filteredCategoryCount = eventsLength;
-  const numOfPages = Math.ceil(filteredCategoryCount / resultPerPage);
-  const skip = resultPerPage * (curPage - 1);
+  // const [curPage, setCurPage] = useState(1);
+  // const [searchInput, setSearchInput] = useState("");
+  // const [setQuery] = useState("");
+  // const [resultPerPage, setResultPerPage] = useState(5);
+  // const curPageHandler = (p) => setCurPage(p);
+  // const filteredCategoryCount = eventsLength;
+  // const numOfPages = Math.ceil(filteredCategoryCount / resultPerPage);
+  // const skip = resultPerPage * (curPage - 1);
   const [setDel] = useState(false);
   // console.log("testing", stories);
-  const [{ loading, error }, dispatch] = useReducer(reducer, {
+  const [{ loading, error }] = useReducer(reducer, {
     loading: false,
     error: "",
   });
@@ -130,26 +130,13 @@ const Transaction = () => {
                 Transactions
               </div>
 
-              {/* <div className="float-end ">
-            <Form.Select
-              aria-label="Default select example"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="">All</option>
-              <option value="Upcoming">Upcoming</option>
-              <option value="Live">Live</option>
-              <option value="Completed">Completed</option>
-            </Form.Select>
-          </div> */}
-
               <div
                 style={{
                   marginRight: "5px",
                 }}
                 className="search-box float-end "
               >
-                <InputGroup>
+                {/* <InputGroup>
                   <Form.Control
                     aria-label="Search Input"
                     placeholder="Search by Event Name"
@@ -166,7 +153,7 @@ const Transaction = () => {
                   >
                     <FaSearch />
                   </InputGroup.Text>
-                </InputGroup>
+                </InputGroup> */}
               </div>
             </Card.Header>
             <Card.Body>
@@ -185,8 +172,6 @@ const Transaction = () => {
                     <th>Payment Amount</th>
                     <th>Payment Type</th>
                     <th>User</th>
-                    {/* <th>Host</th>
-                <th>Status</th> */}
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -197,23 +182,8 @@ const Transaction = () => {
                     transaction.length > 0 &&
                     transaction.map((event, i) => (
                       <tr key={i} className="odd">
-                        <td className="text-center">{skip + i + 1}</td>
+                        <td className="text-center">{i + 1}</td>
                         <td>{event.eventName}</td>
-                        {/* <td
-                      style={{
-                        textAlign: "center",
-                      }}
-                    >
-                      <img
-                        style={{
-                          width: "200px",
-                          height: "100px",
-                          borderRadius: "5px",
-                        }}
-                        src={event.thumbnail}
-                        alt="..."
-                      />
-                    </td> */}
                         <td>{event.paymentStatus}</td>
                         <td>{event.paymentAmount}</td>
                         <td>{event.paymentType}</td>
@@ -248,14 +218,14 @@ const Transaction = () => {
               </Table>
             </Card.Body>
             <Card.Footer>
-              <div className="float-start d-flex align-items-center mt-3">
+              {/* <div className="float-start d-flex align-items-center mt-3">
                 <p className="p-bold m-0 me-3">Row No.</p>
                 <Form.Group controlId="resultPerPage">
                   <Form.Select
                     value={resultPerPage}
                     onChange={(e) => {
                       setResultPerPage(e.target.value);
-                      setCurPage(1);
+                      // setCurPage(1);
                     }}
                     aria-label="Default select example"
                   >
@@ -264,14 +234,14 @@ const Transaction = () => {
                     <option value={15}>15</option>
                   </Form.Select>
                 </Form.Group>
-              </div>
-              {resultPerPage < filteredCategoryCount && (
+              </div> */}
+              {/* {resultPerPage < filteredCategoryCount && (
                 <CustomPagination
                   pages={numOfPages}
                   pageHandler={curPageHandler}
                   curPage={curPage}
                 />
-              )}
+              )} */}
             </Card.Footer>
           </Card>
         )}

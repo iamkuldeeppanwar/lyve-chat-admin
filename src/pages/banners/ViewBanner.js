@@ -28,7 +28,7 @@ const ViewBanner = () => {
 
   useEffect(() => {
     getBanner(ctxDispatch, dispatch, token, id);
-  }, [id]);
+  }, [id, ctxDispatch, token]);
 
   const getDateTime = (dt) => {
     const dT = dt.split(".")[0].split("T");

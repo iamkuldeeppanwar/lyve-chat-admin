@@ -41,7 +41,7 @@ const Dashboard = () => {
   useTitle("Dashboard");
   useEffect(() => {
     getDashboardData(ctxDispatch, dispatch, token);
-  }, [token]);
+  }, [token, ctxDispatch]);
 
   return (
     <>

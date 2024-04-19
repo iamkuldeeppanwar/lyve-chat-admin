@@ -46,7 +46,16 @@ export default function Banners() {
       curPage,
       searchInput
     );
-  }, [curPage, resultPerPage, token, del, query]);
+  }, [
+    curPage,
+    resultPerPage,
+    token,
+    del,
+    query,
+    ctxDispatch,
+    token,
+    searchInput,
+  ]);
 
   const deleteGenre = async (id) => {
     if (
@@ -54,18 +63,15 @@ export default function Banners() {
     ) {
       try {
         setDel(true);
-        const res = await axiosInstance.delete(
-          `/api/banner/delete-banner/${id}`,
-          {
-            headers: { authorization: `Bearer ${token}` },
-          }
-        );
+        await axiosInstance.delete(`/api/banner/delete-banner/${id}`, {
+          headers: { authorization: `Bearer ${token}` },
+        });
 
         toast.success("Banner Deleted Succesfully.", {
           position: toast.POSITION.BOTTOM_CENTER,
         });
 
-        if ((bannerLength - 1) % resultPerPage === 0 && curPage != 1) {
+        if ((bannerLength - 1) % resultPerPage === 0 && curPage !== 1) {
           setCurPage((p) => p - 1);
         }
         setDel(false);

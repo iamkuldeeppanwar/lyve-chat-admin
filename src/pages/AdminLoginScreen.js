@@ -11,7 +11,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { Store } from "../states/store";
 import { reducer } from "../states/reducers";
-import { FaEnvelope, FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
+import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useTitle } from "../components";
 import { toastOptions } from "../utils/error";
 import { clearErrors, login } from "../states/actions";
@@ -54,7 +54,7 @@ export default function AdminLoginScreen() {
       toast.error(error, toastOptions);
       clearErrors(dispatch);
     }
-  }, [error, token]);
+  }, [error, token, navigate]);
 
   useTitle("Login");
 

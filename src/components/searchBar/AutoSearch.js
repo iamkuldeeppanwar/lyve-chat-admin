@@ -1,101 +1,115 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { FormControl, ListGroup } from 'react-bootstrap';
-import axiosInstance from '../../utils/axiosUtil';
-import { ToastContainer, toast } from 'react-toastify';
-import { toastOptions } from '../../utils/error';
-import { Store } from '../../states/store';
+import React from "react";
+// import { FormControl, ListGroup } from 'react-bootstrap';
+// import axiosInstance from "../../utils/axiosUtil";
+// import { toast } from "react-toastify";
+// import { toastOptions } from "../../utils/error";
+// import { Store } from "../../states/store";
 
-const AutocompleteSearch = ({ onSelect, searchType }) => {
-  console.log({ onSelect })
-  const [selectedItem, setSelectedItem] = useState();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredOptions, setFilteredOptions] = useState([]);
+const AutocompleteSearch = () => {
+  // console.log({ onSelect });
+  // const [selectedItem, setSelectedItem] = useState();
+  // const [searchTerm] = useState("");
+  // const [setFilteredOptions] = useState([]);
 
-  const { state } = useContext(Store);
-  const { token } = state;
+  // const { state } = useContext(Store);
+  // const { token } = state;
 
-  useEffect(() => {
-    // Call your API here with the updated search term
-    // and update the filtered options based on the API response
-    if (searchTerm) {
-      (async () => {
-        try {
-          switch (searchType) {
-            case "warehouse":
-              var { data } = await axiosInstance(`/api/warehouse/?keyword=${searchTerm}`);
-              setFilteredOptions(data.warehouses);
-              break;
+  // useEffect(() => {
+  //   // Call your API here with the updated search term
+  //   // and update the filtered options based on the API response
+  //   if (searchTerm) {
+  //     (async () => {
+  //       try {
+  //         switch (searchType) {
+  //           case "warehouse":
+  //             var { data } = await axiosInstance(
+  //               `/api/warehouse/?keyword=${searchTerm}`
+  //             );
+  //             setFilteredOptions(data.warehouses);
+  //             break;
 
-            case "user":
-              var { data } = await axiosInstance(`/api/admin/users/?keyword=${searchTerm}&role=user`, {
-                headers: { Authorization: token }
-              });
-              console.log(data)
-              setFilteredOptions(data.users);
-              break;
+  //           case "user":
+  //             var { data } = await axiosInstance(
+  //               `/api/admin/users/?keyword=${searchTerm}&role=user`,
+  //               {
+  //                 headers: { Authorization: token },
+  //               }
+  //             );
+  //             console.log(data);
+  //             setFilteredOptions(data.users);
+  //             break;
 
-            case "controller":
-              var { data } = await axiosInstance(`/api/admin/users/?keyword=${searchTerm}&role=controller`, {
-                headers: { Authorization: token }
-              });
-              console.log(data)
-              setFilteredOptions(data.users);
-              break;
+  //           case "controller":
+  //             var { data } = await axiosInstance(
+  //               `/api/admin/users/?keyword=${searchTerm}&role=controller`,
+  //               {
+  //                 headers: { Authorization: token },
+  //               }
+  //             );
+  //             console.log(data);
+  //             setFilteredOptions(data.users);
+  //             break;
 
-            case "manager":
-              var { data } = await axiosInstance(`/api/admin/users/?keyword=${searchTerm}&role=manager`, {
-                headers: { Authorization: token }
-              });
-              console.log(data)
-              setFilteredOptions(data.users);
-              break;
+  //           case "manager":
+  //             var { data } = await axiosInstance(
+  //               `/api/admin/users/?keyword=${searchTerm}&role=manager`,
+  //               {
+  //                 headers: { Authorization: token },
+  //               }
+  //             );
+  //             console.log(data);
+  //             setFilteredOptions(data.users);
+  //             break;
 
-            case "order":
-              var { data } = await axiosInstance(`/api/admin/orders/?orderId=${searchTerm}`, {
-                headers: { Authorization: token }
-              });
-              console.log(data)
-              setFilteredOptions(data.orders);
+  //           case "order":
+  //             var { data } = await axiosInstance(
+  //               `/api/admin/orders/?orderId=${searchTerm}`,
+  //               {
+  //                 headers: { Authorization: token },
+  //               }
+  //             );
+  //             console.log(data);
+  //             setFilteredOptions(data.orders);
 
-            default:
-              return;
-          }
-        } catch (error) {
-          toast.error(error, toastOptions);
-        }
-      })();
-    } else setFilteredOptions([]);
-  }, [searchTerm, searchType]);
+  //           default:
+  //             return;
+  //         }
+  //       } catch (error) {
+  //         toast.error(error, toastOptions);
+  //       }
+  //     })();
+  //   } else setFilteredOptions([]);
+  // }, [searchTerm, searchType]);
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-    setSelectedItem(null);
-  };
+  // const handleSearch = (e) => {
+  //   setSearchTerm(e.target.value);
+  //   setSelectedItem(null);
+  // };
 
-  const handleSelectOption = (option) => {
-    console.log({ option })
-    setSearchTerm('');
-    onSelect(option);
-    setFilteredOptions([]);
-  };
+  // const handleSelectOption = (option) => {
+  //   console.log({ option })
+  //   setSearchTerm('');
+  //   onSelect(option);
+  //   setFilteredOptions([]);
+  // };
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'ArrowUp') {
-      if (!selectedItem) setSelectedItem(filteredOptions.length - 1);
-      else setSelectedItem(selectedItem - 1);
-    } else if (e.key === 'ArrowDown') {
-      console.log({ selectedItem })
-      setSelectedItem((prev) => {
-        if (prev === filteredOptions.length - 1 || prev === null) return 0;
-        return prev + 1;
-      });
-    }
-  };
+  // const handleKeyDown = (e) => {
+  //   if (e.key === 'ArrowUp') {
+  //     if (!selectedItem) setSelectedItem(filteredOptions.length - 1);
+  //     else setSelectedItem(selectedItem - 1);
+  //   } else if (e.key === 'ArrowDown') {
+  //     console.log({ selectedItem })
+  //     setSelectedItem((prev) => {
+  //       if (prev === filteredOptions.length - 1 || prev === null) return 0;
+  //       return prev + 1;
+  //     });
+  //   }
+  // };
 
-  console.log({ filteredOptions })
+  // console.log({ filteredOptions })
   return (
     <div style={{ position: "relative" }}>
-      <FormControl
+      {/* <FormControl
         type="text"
         placeholder="Search"
         value={searchTerm}
@@ -190,7 +204,7 @@ const AutocompleteSearch = ({ onSelect, searchType }) => {
           })}
         </ListGroup>
       )}
-      <ToastContainer />
+      <ToastContainer /> */}
     </div>
   );
 };

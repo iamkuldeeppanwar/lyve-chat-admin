@@ -67,7 +67,7 @@ const active_text = {
 
 export default function SideNavbar({ isExpanded }) {
   const pathname = window.location.href.split("/").slice(-1);
-  const [setActiveLink] = useState("Dashboard");
+  const [activeLink, setActiveLink] = useState("Dashboard");
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
   // const { userInfo } = {
