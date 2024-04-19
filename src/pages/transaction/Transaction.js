@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import {
   Button,
   Card,
@@ -10,29 +10,29 @@ import {
 
 import { reducer } from "../../states/reducers";
 // import { ColorRing } from "react-loader-spinner";
-import { Store } from "../../states/store";
+// import { Store } from "../../states/store";
 import { CustomPagination, CustomSkeleton, MessageBox } from "../../components";
-import { FaEye, FaSearch, FaTrashAlt } from "react-icons/fa";
+import { FaSearch, FaTrashAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { getError } from "../../utils/error";
 import axiosInstance from "../../utils/axiosUtil";
 
 const Transaction = () => {
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const navigate = useNavigate();
-  const { events, token, eventsLength } = state;
-  const [status, setStatus] = useState("");
+  const { state } = useContext();
+  // const navigate = useNavigate();
+  const { eventsLength } = state;
+  // const [status, setStatus] = useState("");
   const [curPage, setCurPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
-  const [query, setQuery] = useState("");
+  const [setQuery] = useState("");
   const [resultPerPage, setResultPerPage] = useState(5);
   const curPageHandler = (p) => setCurPage(p);
   const filteredCategoryCount = eventsLength;
   const numOfPages = Math.ceil(filteredCategoryCount / resultPerPage);
   const skip = resultPerPage * (curPage - 1);
-  const [del, setDel] = useState(false);
+  const [setDel] = useState(false);
   // console.log("testing", stories);
   const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: false,
@@ -98,7 +98,7 @@ const Transaction = () => {
     ) {
       try {
         setDel(true);
-        const res = await axiosInstance.delete(`/api/admin/deleteStory/${id}`, {
+        await axiosInstance.delete(`/api/admin/deleteStory/${id}`, {
           headers: { authorization: `Bearer ${token}` },
         });
         setDel(false);
