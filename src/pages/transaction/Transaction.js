@@ -99,7 +99,7 @@ const Transaction = () => {
       try {
         setDel(true);
         await axiosInstance.delete(`/api/admin/deleteStory/${id}`, {
-          headers: { authorization: `Bearer ${token}` },
+          // headers: { authorization: `Bearer ${token}` },
         });
         setDel(false);
         toast.success("Story Deleted Successsfully", {
