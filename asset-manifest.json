@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/lyve-chat-admin/static/css/main.f5d5d326.css",
+    "main.js": "/lyve-chat-admin/static/js/main.84f6588c.js",
+    "static/js/453.dd53e008.chunk.js": "/lyve-chat-admin/static/js/453.dd53e008.chunk.js",
+    "service-worker.js": "/lyve-chat-admin/service-worker.js",
+    "static/media/creativestory.svg": "/lyve-chat-admin/static/media/creativestory.b8b75879915f7e71d514925cf148a395.svg",
+    "index.html": "/lyve-chat-admin/index.html",
+    "main.f5d5d326.css.map": "/lyve-chat-admin/static/css/main.f5d5d326.css.map",
+    "main.84f6588c.js.map": "/lyve-chat-admin/static/js/main.84f6588c.js.map",
+    "453.dd53e008.chunk.js.map": "/lyve-chat-admin/static/js/453.dd53e008.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f5d5d326.css",
+    "static/js/main.84f6588c.js"
+  ]
+}
