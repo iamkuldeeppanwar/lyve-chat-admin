@@ -24,6 +24,7 @@ import Transaction from "./pages/transaction/Transaction";
 function App() {
   const { state } = useContext(Store);
   const { token } = state;
+  console.log("r");
 
   const pageLocation = useLocation();
 
