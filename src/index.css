@@ -89,12 +89,13 @@ td {
 .header {
   border-bottom: 1px solid #dee2e6;
   z-index: 1020;
-  background: rgb(15, 145, 122);
+  background-color: #38a339;
+  /* background: rgb(15, 145, 122);
   background: linear-gradient(
     120deg,
     rgba(15, 145, 122, 1) 0%,
     rgba(131, 227, 124, 1) 75%
-  );
+  ); */
 }
 
 .header-link {
@@ -179,6 +180,8 @@ td {
 
 .body-wrapper.mini-body {
   margin-left: 250px;
+  /* background-color: black;
+  color: white; */
 }
 
 .body-wrapper.full-body {
@@ -187,10 +190,11 @@ td {
 
 .sidebar-wrapper {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22) !important;
-  background: linear-gradient(
+  /* background: linear-gradient(
     rgba(15, 145, 122, 1) 0%,
     rgba(131, 227, 124, 1) 75%
-  );
+  ); */
+  background-color: #38a339;
   z-index: 1038;
   height: 100vh;
   position: fixed;

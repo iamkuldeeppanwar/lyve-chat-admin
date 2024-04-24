@@ -58,7 +58,7 @@ const linkList = [
 const active_text = {
   Dashboard: "dashboard",
   Users: "users",
-  Stories: "stories",
+  Events: "events",
   Genres: "genres",
   Banners: "banners",
   "Privacy Policy": "privacy-policy",

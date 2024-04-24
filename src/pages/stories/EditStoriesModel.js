@@ -87,6 +87,30 @@ export default function EditStoriesModel(props) {
 
   useEffect(() => {}, [id, props.show]);
 
+  // Event Time
+  const handleTimeChange = (e) => {
+    const inputTime = e.target.value;
+    // Validate the time format (HH:MM:SS)
+    if (
+      /^([01]?[0-9]|2[0-3]):([0-5]?[0-9]):([0-5]?[0-9])$/.test(inputTime) ||
+      inputTime === ""
+    ) {
+      setEventTime(inputTime);
+    }
+  };
+
+  // Event Duration
+  const handleTime = (e) => {
+    const inputTime = e.target.value;
+    // Validate the time format (HH:MM:SS)
+    if (
+      /^([01]?[0-9]|2[0-3]):([0-5]?[0-9]):([0-5]?[0-9])$/.test(inputTime) ||
+      inputTime === ""
+    ) {
+      setEventDuration(inputTime);
+    }
+  };
+
   const fileHandler = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -211,9 +235,9 @@ export default function EditStoriesModel(props) {
             <Form.Group className="mb-3" controlId="name">
               <Form.Label>Event Duration</Form.Label>
               <Form.Control
-                type="time"
+                type="text"
                 value={eventDuration}
-                onChange={(e) => setEventDuration(e.target.value)}
+                onChange={(e) => handleTime(e)}
               />
             </Form.Group>
 
@@ -225,9 +249,10 @@ export default function EditStoriesModel(props) {
             <Form.Group className="mb-3" controlId="name">
               <Form.Label>Event Time</Form.Label>
               <Form.Control
-                type="time"
+                type="text"
                 value={eventTime}
-                onChange={(e) => setEventTime(e.target.value)}
+                onChange={(e) => handleTimeChange(e)}
+                placeholder="HH:MM:SS"
               />
             </Form.Group>
 

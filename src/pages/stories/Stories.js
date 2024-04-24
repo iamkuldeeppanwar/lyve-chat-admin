@@ -108,21 +108,20 @@ export default function Stories() {
 
   const deleteStory = async (id) => {
     if (
-      window.confirm("Are you sure you want to delete this story room?") ===
-      true
+      window.confirm("Are you sure you want to delete this event?") === true
     ) {
       try {
         setDel(true);
-        const res = await axiosInstance.delete(`/api/admin/deleteStory/${id}`, {
-          headers: { authorization: `Bearer ${token}` },
+        await axiosInstance.delete(`/api/admin/delete/${id}`, {
+          headers: { authorization: `${token}` },
         });
         setDel(false);
-        toast.success("Story Deleted Successsfully", {
-          position: toast.POSITION.BOTTOM_CENTER,
+        toast.success("Event deleted Successsfully", {
+          position: toast.POSITION.TOP_RIGHT,
         });
       } catch (error) {
         toast.error(getError(error), {
-          position: toast.POSITION.BOTTOM_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
         });
       }
     }

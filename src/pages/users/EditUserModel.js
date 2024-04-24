@@ -22,8 +22,10 @@ export default function EditUserModel(props) {
     error: "",
   });
   const [username, setUsername] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("Male");
   const [mobile, setMobile] = useState("");
+  const [country, setCountry] = useState("");
+  const [dob, setDob] = useState("");
   const [image, setImage] = useState("");
 
   // console.log(user);
@@ -32,12 +34,17 @@ export default function EditUserModel(props) {
     setUsername(user?.username ? user.username : "");
     setGender(user?.gender ? user.gender : "");
     setMobile(user?.mobile_no ? user.mobile_no : "");
+    setCountry(user?.country ? user.country : "");
+    setDob(user?.dob ? user.dob : "");
   }, [user]);
 
   const resetForm = () => {
     setMobile("");
     setUsername("");
     setGender("");
+    setCountry("");
+    setDob("");
+    setImage("");
   };
 
   const changeHandler = (e) => {
@@ -142,15 +149,34 @@ export default function EditUserModel(props) {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Gender</Form.Label>
-              <Form.Control
+              <Form.Label>Gender</Form.Label>.
+              <Form.Select
+                aria-label="Default select example"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-              />
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Event Thumbnail</Form.Label>
+              <Form.Label>User Profile</Form.Label>
               <Form.Control onChange={(e) => fileHandler(e)} type="file" />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="name">
+              <Form.Label>Country</Form.Label>
+              <Form.Control
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="mobile_no">
+              <Form.Label>Date of Birth</Form.Label>
+              <Form.Control
+                type="date"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
             </Form.Group>
             <Form.Group className="mb-3" controlId="name">
               <Form.Label>Mobile no</Form.Label>

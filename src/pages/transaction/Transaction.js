@@ -172,7 +172,7 @@ const Transaction = () => {
                     <th>Payment Amount</th>
                     <th>Payment Type</th>
                     <th>User</th>
-                    <th>Actions</th>
+                    {/* <th>Actions</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -201,7 +201,7 @@ const Transaction = () => {
                           >
                             <FaEye />
                           </Button> */}
-                          <Button
+                          {/* <Button
                             onClick={() => {
                               deleteStory(event.id);
                             }}
@@ -209,7 +209,7 @@ const Transaction = () => {
                             className="btn btn-danger ms-2"
                           >
                             <FaTrashAlt />
-                          </Button>
+                          </Button> */}
                         </td>
                       </tr>
                     ))

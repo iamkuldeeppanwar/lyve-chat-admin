@@ -25,11 +25,11 @@ const Dashboard = () => {
   ];
   const redirectArray = [
     "/users",
-    "/stories",
+    "/events",
     "/genres",
-    "/stories",
-    "/stories",
-    "/stories",
+    "/events",
+    "/events",
+    "/events",
   ];
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,

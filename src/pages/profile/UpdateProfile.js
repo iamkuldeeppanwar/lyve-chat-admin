@@ -14,13 +14,13 @@ export default function UpdateProfileModel(props) {
 
   const [username, setUsername] = useState("");
   const [country, setCountry] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("Male");
   const [image, setImage] = useState("");
   const [dob, setDob] = useState("");
   const [mobile_no, setMobileNo] = useState("");
 
   const [loadingUpdate, setLoadingUpdate] = useState(false);
-  const [dispatch] = useReducer(reducer, {
+  const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
@@ -196,7 +196,7 @@ export default function UpdateProfileModel(props) {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="name">
-              <Form.Label>Avatar</Form.Label>
+              <Form.Label>Profile</Form.Label>
               <Form.Control onChange={(e) => fileHandler(e)} type="file" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="mobile_no">
@@ -218,10 +218,14 @@ export default function UpdateProfileModel(props) {
 
             <Form.Group className="mb-3" controlId="mobile_no">
               <Form.Label>Gender</Form.Label>
-              <Form.Control
+              <Form.Select
+                aria-label="Default select example"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-              />
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </Form.Select>
             </Form.Group>
             <ToastContainer />
           </Container>

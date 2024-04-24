@@ -79,7 +79,7 @@ const ViewProfile = () => {
                 </div>
               </Card.Header>
               <Card.Body>
-                {/* <Row>
+                <Row>
                   <Col md={4}>
                     {loading ? (
                       <Skeleton height={200} />
@@ -96,7 +96,7 @@ const ViewProfile = () => {
                       />
                     )}
                   </Col>
-                </Row> */}
+                </Row>
                 <Row>
                   <Col md={4}>
                     <p className="mb-0">

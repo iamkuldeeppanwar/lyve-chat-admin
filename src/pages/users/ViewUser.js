@@ -68,7 +68,7 @@ const ViewUser = () => {
                     ) : (
                       <img
                         style={{
-                          borderRadius: "100%",
+                          borderRadius: "5px",
                         }}
                         src={user.avatar}
                         alt=""
