@@ -13,20 +13,16 @@ const initialState = {
   users: [],
   userLength: 0,
   user: {},
-  stories: [],
   eventsLength: 0,
   event: {},
-  events: {},
-  streamDetails: {},
+  events: [],
   transactions: [],
   transactionLength: 0,
   transaction: {},
   genres: [],
   genreLength: 0,
   genre: {},
-  banners: [],
-  bannerLength: 0,
-  banner: {},
+  streamDetails: {},
   privacyPolicy: "",
   termsAndCondition: "",
 };
@@ -63,17 +59,12 @@ function reducer(state, action) {
         events: action.payload.events,
         eventsLength: action.payload.length,
       };
-    case "EVENTS_DATA_FETCH_SUCCESSFULLY":
-      return {
-        ...state,
-        events: action.payload.events,
-      };
     case "EVENT_DATA_FETCH_SUCCESSFULLY":
       return {
         ...state,
         event: action.payload.event,
       };
-    case "TRANSACTION_DATA_FETCH_SUCCESSFULLY":
+    case "TRANSACTIONS_DATA_FETCH_SUCCESSFULLY":
       return {
         ...state,
         transactions: action.payload.transactions,
@@ -82,12 +73,7 @@ function reducer(state, action) {
     case "TRANSACTION_DATA_FETCH_SUCCESSFULLY":
       return {
         ...state,
-        transactions: action.payload.transactions,
-      };
-    case "TRANSACTION_DATA_FETCH_SUCCESSFULLY":
-      return {
-        ...state,
-        transacton: action.payload.transacton,
+        transaction: action.payload.transaction,
       };
     case "STREAM_DATA_FETCH_SUCCESSFULLY":
       return {
@@ -104,17 +90,6 @@ function reducer(state, action) {
       return {
         ...state,
         genre: action.payload.genre,
-      };
-    case "BANNERS_DATA_FETCH_SUCCESSFULLY":
-      return {
-        ...state,
-        banners: action.payload.banners,
-        bannerLength: action.payload.length,
-      };
-    case "BANNER_DATA_FETCH_SUCCESSFULLY":
-      return {
-        ...state,
-        banner: action.payload.banner,
       };
     case "FETCH_PRIVACY_POLICY":
       return {

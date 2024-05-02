@@ -1,113 +1,76 @@
-import React, { useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import {
   Button,
   Card,
   Container,
-  // Form,
-  // InputGroup,
+  Form,
+  InputGroup,
   Table,
 } from "react-bootstrap";
-
+import { getAllTransactions } from "../../states/actions";
 import { reducer } from "../../states/reducers";
 // import { ColorRing } from "react-loader-spinner";
-// import { Store } from "../../states/store";
-import { CustomSkeleton, MessageBox } from "../../components";
-import { FaTrashAlt } from "react-icons/fa";
+import { Store } from "../../states/store";
+import { CustomPagination, CustomSkeleton, MessageBox } from "../../components";
+import { FaEye, FaSearch, FaTrashAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { getError } from "../../utils/error";
 import axiosInstance from "../../utils/axiosUtil";
+// import { io } from "socket.io-client";
 
-const Transaction = () => {
-  // const { state } = useContext();
-  // const navigate = useNavigate();
-  // const { eventsLength } = state;
-  // const [status, setStatus] = useState("");
-  // const [curPage, setCurPage] = useState(1);
-  // const [searchInput, setSearchInput] = useState("");
-  // const [setQuery] = useState("");
-  // const [resultPerPage, setResultPerPage] = useState(5);
-  // const curPageHandler = (p) => setCurPage(p);
-  // const filteredCategoryCount = eventsLength;
-  // const numOfPages = Math.ceil(filteredCategoryCount / resultPerPage);
-  // const skip = resultPerPage * (curPage - 1);
-  const [setDel] = useState(false);
+export default function Transaction() {
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const navigate = useNavigate();
+  const { transactions, token, transactionLength } = state;
+  const [status, setStatus] = useState("");
+  const [curPage, setCurPage] = useState(1);
+  const [searchInput, setSearchInput] = useState("");
+  const [query, setQuery] = useState("");
+  const [resultPerPage, setResultPerPage] = useState(5);
+  const curPageHandler = (p) => setCurPage(p);
+  const filteredCategoryCount = transactionLength;
+  const numOfPages = Math.ceil(filteredCategoryCount / resultPerPage);
+  const skip = resultPerPage * (curPage - 1);
+  const [del, setDel] = useState(false);
   // console.log("testing", stories);
-  const [{ loading, error }] = useReducer(reducer, {
+  const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: false,
     error: "",
   });
 
-  // console.log(eventsLength);
+  // console.log(transactions);
 
-  const transaction = [
-    {
-      eventName: "Art Event",
-      paymentAmount: "3000",
-      paymentStatus: "paid",
-      paymentType: "Card",
-      userName: "Alex",
-    },
-    {
-      eventName: "Chrismat Event",
-      paymentAmount: "500",
-      paymentStatus: "unpaid",
-      paymentType: "Card",
-      userName: "Alex",
-    },
-    {
-      eventName: "Music Event",
-      paymentAmount: "200",
-      paymentStatus: "unpaid",
-      paymentType: "Card",
-      userName: "Alex",
-    },
-    {
-      eventName: " Event",
-      paymentAmount: "5000",
-      paymentStatus: "paid",
-      paymentType: "Card",
-      userName: "Alex",
-    },
-    {
-      eventName: "Art Event",
-      paymentAmount: "3000",
-      paymentStatus: "paid",
-      paymentType: "Card",
-      userName: "Alex",
-    },
-  ];
+  useEffect(() => {
+    getAllTransactions(
+      ctxDispatch,
+      dispatch,
+      token,
+      resultPerPage,
+      curPage,
+      searchInput,
+      status
+    );
+  }, [curPage, resultPerPage, token, del, query, status]);
 
-  // useEffect(() => {
-  //   getAllEvents(
-  //     ctxDispatch,
-  //     dispatch,
-  //     token,
-  //     resultPerPage,
-  //     curPage,
-  //     searchInput,
-  //     status
-  //   );
-  // }, [curPage, resultPerPage, token, del, query, status]);
-
-  const deleteStory = async (id) => {
+  const deleteTransaction = async (id) => {
     if (
-      window.confirm("Are you sure you want to delete this story room?") ===
+      window.confirm("Are you sure you want to delete this transaction?") ===
       true
     ) {
       try {
         setDel(true);
-        await axiosInstance.delete(`/api/admin/deleteStory/${id}`, {
-          // headers: { authorization: `Bearer ${token}` },
+        await axiosInstance.delete(`/api/admin/delete-transaction/${id}`, {
+          headers: { authorization: `${token}` },
         });
         setDel(false);
-        toast.success("Story Deleted Successsfully", {
-          position: toast.POSITION.BOTTOM_CENTER,
+        toast.success("Transaction deleted Successsfully", {
+          position: toast.POSITION.TOP_RIGHT,
         });
       } catch (error) {
         toast.error(getError(error), {
-          position: toast.POSITION.BOTTOM_CENTER,
+          position: toast.POSITION.TOP_RIGHT,
         });
       }
     }
@@ -130,16 +93,29 @@ const Transaction = () => {
                 Transactions
               </div>
 
+              <div className="float-end ">
+                <Form.Select
+                  aria-label="Default select example"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                >
+                  <option value="">All</option>
+                  <option value="succeeded">Succeeded</option>
+                  <option value="failed">Failed</option>
+                  <option value="cancelled">Chancelled</option>
+                </Form.Select>
+              </div>
+
               <div
                 style={{
                   marginRight: "5px",
                 }}
                 className="search-box float-end "
               >
-                {/* <InputGroup>
+                <InputGroup>
                   <Form.Control
                     aria-label="Search Input"
-                    placeholder="Search by Event Name"
+                    placeholder="Search by Transaction id"
                     type="search"
                     value={searchInput}
                     onChange={(e) => setSearchInput(e.target.value)}
@@ -153,12 +129,17 @@ const Transaction = () => {
                   >
                     <FaSearch />
                   </InputGroup.Text>
-                </InputGroup> */}
+                </InputGroup>
               </div>
             </Card.Header>
             <Card.Body>
               <Table
-                style={{ height: "500px", overflowY: "scroll" }}
+                // style={
+                //   eventsLength > 1
+                //     ? { height: "500px", overflowY: "scroll" }
+                //     : { height: "200px", overflowY: "scroll" }
+                // }
+                style={{ height: "200px", overflowY: "scroll" }}
                 responsive
                 striped
                 bordered
@@ -167,49 +148,47 @@ const Transaction = () => {
                 <thead>
                   <tr>
                     <th>S.no</th>
-                    <th>Event Name</th>
+                    <th>Transaction ID</th>
+                    <th>Customer ID</th>
+                    <th>Amount</th>
                     <th>Payment Status</th>
-                    <th>Payment Amount</th>
-                    <th>Payment Type</th>
-                    <th>User</th>
-                    {/* <th>Actions</th> */}
+                    <th>Payment Gateway</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {loading ? (
                     <CustomSkeleton resultPerPage={5} column={8} />
                   ) : (
-                    transaction.length > 0 &&
-                    transaction.map((event, i) => (
+                    transactions.length > 0 &&
+                    transactions.map((trans, i) => (
                       <tr key={i} className="odd">
-                        <td className="text-center">{i + 1}</td>
-                        <td>{event.eventName}</td>
-                        <td>{event.paymentStatus}</td>
-                        <td>{event.paymentAmount}</td>
-                        <td>{event.paymentType}</td>
-                        {/* <td>{event.host}</td> */}
-                        <td>{event.userName}</td>
+                        <td className="text-center">{skip + i + 1}</td>
+                        <td>{trans.transaction_id}</td>
+                        <td>{trans.customer_id}</td>
+                        <td>{trans.payment_amount}</td>
+                        <td>{trans.payment_status}</td>
+                        <td>{trans.payment_gateway}</td>
+
                         <td>
-                          {/* <Button
+                          <Button
                             onClick={() => {
-                              navigate(
-                                `/admin/view/story/${event.id}?status=${event.status}`
-                              );
+                              navigate(`/admin/view/transaction/${trans.id}`);
                             }}
                             type="success"
                             className="btn btn-primary"
                           >
                             <FaEye />
-                          </Button> */}
-                          {/* <Button
+                          </Button>
+                          <Button
                             onClick={() => {
-                              deleteStory(event.id);
+                              deleteTransaction(trans.id);
                             }}
                             type="danger"
                             className="btn btn-danger ms-2"
                           >
                             <FaTrashAlt />
-                          </Button> */}
+                          </Button>
                         </td>
                       </tr>
                     ))
@@ -218,14 +197,14 @@ const Transaction = () => {
               </Table>
             </Card.Body>
             <Card.Footer>
-              {/* <div className="float-start d-flex align-items-center mt-3">
+              <div className="float-start d-flex align-items-center mt-3">
                 <p className="p-bold m-0 me-3">Row No.</p>
                 <Form.Group controlId="resultPerPage">
                   <Form.Select
                     value={resultPerPage}
                     onChange={(e) => {
                       setResultPerPage(e.target.value);
-                      // setCurPage(1);
+                      setCurPage(1);
                     }}
                     aria-label="Default select example"
                   >
@@ -234,14 +213,14 @@ const Transaction = () => {
                     <option value={15}>15</option>
                   </Form.Select>
                 </Form.Group>
-              </div> */}
-              {/* {resultPerPage < filteredCategoryCount && (
+              </div>
+              {resultPerPage < filteredCategoryCount && (
                 <CustomPagination
                   pages={numOfPages}
                   pageHandler={curPageHandler}
                   curPage={curPage}
                 />
-              )} */}
+              )}
             </Card.Footer>
           </Card>
         )}
@@ -249,6 +228,4 @@ const Transaction = () => {
       </Container>
     </motion.div>
   );
-};
-
-export default Transaction;
+}

@@ -132,7 +132,7 @@ export const getUser = async (ctxDispatch, dispatch, token, id) => {
 export const getSingleEvent = async (ctxDispatch, dispatch, token, id) => {
   try {
     dispatch({ type: "FETCH_REQUEST" });
-    const { data } = await axiosInstance.get(`/api/events/${id}/get-event`, {
+    const { data } = await axiosInstance.get(`/api/events/get-event/${id}`, {
       headers: { authorization: `${token}` },
     });
     // console.log(data);
@@ -304,6 +304,67 @@ export const getBanner = async (ctxDispatch, dispatch, token, id) => {
       ctxDispatch({
         type: "BANNER_DATA_FETCH_SUCCESSFULLY",
         payload: { banner: data.banner },
+      });
+      dispatch({ type: "FETCH_SUCCESS" });
+    } else {
+      dispatch({ type: "FETCH_FAIL", payload: getError(data) });
+    }
+  } catch (err) {
+    dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+  }
+};
+
+export const getAllTransactions = async (
+  ctxDispatch,
+  dispatch,
+  token,
+  resultPerPage,
+  curPage,
+  searchInput,
+  status
+) => {
+  try {
+    dispatch({ type: "FETCH_REQUEST" });
+    const { data } = await axiosInstance.get(
+      `/api/admin/all_transactions?key=${searchInput}&currentPage=${curPage}&resultPerPage=${resultPerPage}&status=${status}`,
+      {
+        headers: { authorization: `${token}` },
+      }
+    );
+    // console.log(data.length);
+    if (data.success) {
+      ctxDispatch({
+        type: "TRANSACTIONS_DATA_FETCH_SUCCESSFULLY",
+        payload: { transactions: data.transactions, length: data.length },
+      });
+      dispatch({ type: "FETCH_SUCCESS" });
+    } else {
+      dispatch({ type: "FETCH_FAIL", payload: getError(data) });
+    }
+  } catch (err) {
+    dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+  }
+};
+
+export const getSingleTransaction = async (
+  ctxDispatch,
+  dispatch,
+  token,
+  id
+) => {
+  try {
+    dispatch({ type: "FETCH_REQUEST" });
+    const { data } = await axiosInstance.get(
+      `/api/admin/get-transaction/${id}`,
+      {
+        headers: { authorization: `${token}` },
+      }
+    );
+    // console.log(data);
+    if (data.success) {
+      ctxDispatch({
+        type: "TRANSACTION_DATA_FETCH_SUCCESSFULLY",
+        payload: { transaction: data.transaction },
       });
       dispatch({ type: "FETCH_SUCCESS" });
     } else {

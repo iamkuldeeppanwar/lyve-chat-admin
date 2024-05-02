@@ -17,7 +17,8 @@ import ViewGenre from "./pages/genres/ViewGenre";
 import AddGenre from "./pages/genres/AddGenre";
 import Banners from "./pages/banners/Banners";
 import AddBanner from "./pages/banners/AddBanner";
-import ViewBanner from "./pages/banners/ViewBanner";
+// import ViewBanner from "./pages/banners/ViewBanner";
+import ViewTransaction from "./pages/transaction/ViewTransaction";
 import DeleteAccount from "./pages/deleteaccount/DeleteAccount";
 import Transaction from "./pages/transaction/Transaction";
 
@@ -145,10 +146,10 @@ function App() {
           />
           <Route
             exact
-            path="/admin/view/banner/:id"
+            path="/admin/view/transaction/:id"
             element={
               <AdminProtectedRoute>
-                <ViewBanner />
+                <ViewTransaction />
               </AdminProtectedRoute>
             }
           />

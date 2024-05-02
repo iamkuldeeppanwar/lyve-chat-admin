@@ -30,7 +30,7 @@ const ViewStories = () => {
     error: "",
   });
 
-  // console.log(streamDetails);
+  console.log(streamDetails);
 
   useEffect(() => {
     getSingleEvent(ctxDispatch, dispatch, token, id);
@@ -127,7 +127,7 @@ const ViewStories = () => {
                           {loading ? (
                             <Skeleton />
                           ) : (
-                            event.event_date.split("T")[0]
+                            event.event_date && event.event_date.split("T")[0]
                           )}
                         </p>
                       </Col>

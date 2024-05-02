@@ -12,24 +12,27 @@ import { motion } from "framer-motion";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const dummyArray = [1, 2, 3, 4, 5, 6];
+  const dummyArray = [1, 2, 3, 4, 5, 6, 7];
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { dashboardData, token } = state;
   const arr = [
     "bg-info",
-    "bg-success",
+    "bg-dark",
     "bg-primary",
     "bg-danger",
     "bg-secondary",
     "bg-warning",
+    "bg-success",
   ];
   const redirectArray = [
     "/users",
     "/events",
     "/genres",
+    "/transactions",
     "/events",
     "/events",
     "/events",
+    ,
   ];
   const [{ loading }, dispatch] = useReducer(reducer, {
     loading: false,
