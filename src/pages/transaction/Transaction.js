@@ -102,7 +102,6 @@ export default function Transaction() {
                   <option value="">All</option>
                   <option value="succeeded">Succeeded</option>
                   <option value="failed">Failed</option>
-                  <option value="cancelled">Chancelled</option>
                 </Form.Select>
               </div>
 
