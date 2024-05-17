@@ -28,7 +28,7 @@ const ViewTransaction = () => {
     getSingleTransaction(ctxDispatch, dispatch, token, id);
   }, [id, dispatch]);
 
-  // console.log(transaction);
+  console.log(transaction);
 
   const getDateTime = (dt) => {
     const dT = dt.split(".")[0].split("T");
@@ -50,13 +50,6 @@ const ViewTransaction = () => {
             <Card>
               <Card.Header>
                 <Card.Title>Transaction Details</Card.Title>
-
-                {/* <div className="card-tools">
-                  <FaEdit
-                    style={{ color: "blue" }}
-                    onClick={() => setModalShow(true)}
-                  />
-                </div> */}
               </Card.Header>
               <Card.Body>
                 <Row className="mb-3">
@@ -130,7 +123,7 @@ const ViewTransaction = () => {
                   </Col>
                 </Row>
 
-                <hr />
+                {/* <hr />
                 <Row>
                   <Col md={12}>
                     <Col>
@@ -145,7 +138,7 @@ const ViewTransaction = () => {
                           style={{
                             borderRadius: "5px",
                           }}
-                          src={transaction.event.thumbnail}
+                          // src={transaction.event.thumbnail}
                           alt=""
                           className="img-fluid"
                           width={"200px"}
@@ -196,7 +189,7 @@ const ViewTransaction = () => {
                       </Col>
                     </Row>
                   </Col>
-                </Row>
+                </Row> */}
               </Card.Body>
             </Card>
             {/* <EditStoriesModel
