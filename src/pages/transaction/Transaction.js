@@ -165,7 +165,7 @@ export default function Transaction() {
                         <td className="text-center">{skip + i + 1}</td>
                         <td>{trans.transaction_id}</td>
                         <td>{trans.customer_id}</td>
-                        <td>{trans.payment_amount}</td>
+                        <td>${trans.payment_amount / 100}</td>
                         <td>{trans.payment_status}</td>
                         <td>{trans.payment_gateway}</td>
 
