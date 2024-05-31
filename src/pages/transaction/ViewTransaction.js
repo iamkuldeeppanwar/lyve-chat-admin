@@ -76,7 +76,11 @@ const ViewTransaction = () => {
                           <strong>Amount</strong>
                         </p>
                         <p>
-                          {loading ? <Skeleton /> : transaction.payment_amount}
+                          {loading ? (
+                            <Skeleton />
+                          ) : (
+                            `$ ${transaction.payment_amount / 100}`
+                          )}
                         </p>
                       </Col>
                       <Col md={3}>
