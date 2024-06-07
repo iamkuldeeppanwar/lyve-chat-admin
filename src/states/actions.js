@@ -159,7 +159,7 @@ export const getStreamedDetails = async (ctxDispatch, dispatch, token, id) => {
         headers: { authorization: `${token}` },
       }
     );
-    console.log(data);
+    // console.log(data);
     if (data.success) {
       ctxDispatch({
         type: "STREAM_DATA_FETCH_SUCCESSFULLY",

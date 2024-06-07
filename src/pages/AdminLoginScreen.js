@@ -120,11 +120,7 @@ export default function AdminLoginScreen() {
                 )}
               </Col>
             </Row> */}
-            <div className="d-flex justify-content-between align-items-center">
-              <div className="d-flex gap-2">
-                <input type="checkbox" />
-                <label>Remember Me</label>
-              </div>
+            <div className="d-flex justify-content-end align-items-center">
               <div>
                 {loading ? (
                   <Button disabled className="float-sm-end">
