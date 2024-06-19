@@ -147,7 +147,7 @@ export default function Genres() {
                 </thead>
                 <tbody>
                   {loading ? (
-                    <CustomSkeleton resultPerPage={5} column={5} />
+                    <CustomSkeleton resultPerPage={5} column={4} />
                   ) : (
                     genres.length > 0 &&
                     genres.map((genre, i) => (

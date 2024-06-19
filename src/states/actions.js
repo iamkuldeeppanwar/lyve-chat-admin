@@ -150,29 +150,29 @@ export const getSingleEvent = async (ctxDispatch, dispatch, token, id) => {
   }
 };
 
-export const getStreamedDetails = async (ctxDispatch, dispatch, token, id) => {
-  try {
-    dispatch({ type: "FETCH_REQUEST" });
-    const { data } = await axiosInstance.get(
-      `/api/events/stream-details/${id}`,
-      {
-        headers: { authorization: `${token}` },
-      }
-    );
-    // console.log(data);
-    if (data.success) {
-      ctxDispatch({
-        type: "STREAM_DATA_FETCH_SUCCESSFULLY",
-        payload: { event: data.event },
-      });
-      dispatch({ type: "FETCH_SUCCESS" });
-    } else {
-      dispatch({ type: "FETCH_FAIL", payload: getError(data) });
-    }
-  } catch (err) {
-    dispatch({ type: "FETCH_FAIL", payload: getError(err) });
-  }
-};
+// export const getStreamedDetails = async (ctxDispatch, dispatch, token, id) => {
+//   try {
+//     dispatch({ type: "FETCH_REQUEST" });
+//     const { data } = await axiosInstance.get(
+//       `/api/events/stream-details/${id}`,
+//       {
+//         headers: { authorization: `${token}` },
+//       }
+//     );
+//     // console.log(data);
+//     if (data.success) {
+//       ctxDispatch({
+//         type: "STREAM_DATA_FETCH_SUCCESSFULLY",
+//         payload: { event: data.event },
+//       });
+//       dispatch({ type: "FETCH_SUCCESS" });
+//     } else {
+//       dispatch({ type: "FETCH_FAIL", payload: getError(data) });
+//     }
+//   } catch (err) {
+//     dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+//   }
+// };
 
 export const getAllEvents = async (
   ctxDispatch,

@@ -157,7 +157,7 @@ export default function Transaction() {
                 </thead>
                 <tbody>
                   {loading ? (
-                    <CustomSkeleton resultPerPage={5} column={8} />
+                    <CustomSkeleton resultPerPage={5} column={7} />
                   ) : (
                     transactions.length > 0 &&
                     transactions.map((trans, i) => (

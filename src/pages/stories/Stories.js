@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 import { getAllEvents } from "../../states/actions";
 import { reducer } from "../../states/reducers";
-// import { ColorRing } from "react-loader-spinner";
 import { Store } from "../../states/store";
 import { CustomPagination, CustomSkeleton, MessageBox } from "../../components";
 import { FaEye, FaSearch, FaTrashAlt } from "react-icons/fa";
@@ -18,7 +17,6 @@ import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { getError } from "../../utils/error";
 import axiosInstance from "../../utils/axiosUtil";
-// import { io } from "socket.io-client";
 
 export default function Stories() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -34,13 +32,10 @@ export default function Stories() {
   const numOfPages = Math.ceil(filteredCategoryCount / resultPerPage);
   const skip = resultPerPage * (curPage - 1);
   const [del, setDel] = useState(false);
-  // console.log("testing", stories);
   const [{ loading, error }, dispatch] = useReducer(reducer, {
     loading: false,
     error: "",
   });
-
-  // console.log(eventsLength);
 
   useEffect(() => {
     getAllEvents(
@@ -53,58 +48,6 @@ export default function Stories() {
       status
     );
   }, [curPage, resultPerPage, token, del, query, status]);
-
-  // const liked = 51;
-
-  // const userData = [
-  //   {
-  //     id: 1,
-  //     name: "Akask",
-  //     liked: 1,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Aman",
-  //     liked: 0,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Ajay",
-  //     liked: 1,
-  //   },
-  // ];
-
-  // const dummyEvents = [
-  //   {
-  //     id: "123",
-  //     name: "Music",
-  //   },
-  // ];
-
-  // =========== socket start ============
-  // useEffect(() => {
-  //   console.log("renderrrrrr");
-  //   const socket = io("http://localhost:5000");
-
-  //   socket.emit("joinEvent", { eventId: dummyEvents[0].id, users: userData });
-
-  //   socket.on("userCountUpdated", (userCount) => {
-  //     console.log("User count", userCount);
-  //   });
-
-  //   socket.on("likedEvents", (data) => {
-  //     console.log(data);
-  //   });
-
-  //   socket.on("disconnect", () => {
-  //     console.log("Disconnected");
-  //   });
-
-  //   // Clean up Socket.IO connection on component unmount
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, [status]);
 
   const deleteStory = async (id) => {
     if (
@@ -211,7 +154,7 @@ export default function Stories() {
                 </thead>
                 <tbody>
                   {loading ? (
-                    <CustomSkeleton resultPerPage={5} column={8} />
+                    <CustomSkeleton resultPerPage={5} column={9} />
                   ) : (
                     events.length > 0 &&
                     events.map((event, i) => (

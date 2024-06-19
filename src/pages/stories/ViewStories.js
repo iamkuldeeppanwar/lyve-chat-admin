@@ -30,13 +30,13 @@ const ViewStories = () => {
     error: "",
   });
 
-  console.log(streamDetails);
+  // console.log(streamDetails);
 
   useEffect(() => {
     getSingleEvent(ctxDispatch, dispatch, token, id);
-    if (statuses === "Completed") {
-      getStreamedDetails(ctxDispatch, dispatch, token, id);
-    }
+    // if (statuses === "Completed") {
+    //   getStreamedDetails(ctxDispatch, dispatch, token, id);
+    // }
   }, [statuses, id]);
 
   const getDateTime = (dt) => {
@@ -172,7 +172,7 @@ const ViewStories = () => {
                   </Col>
                 </Row>
 
-                {statuses === "Completed" && (
+                {/* {statuses === "Completed" && (
                   <Row className="mb-3">
                     <Col>
                       <strong>Stream Details</strong>
@@ -222,7 +222,7 @@ const ViewStories = () => {
                       </Row>
                     </Col>
                   </Row>
-                )}
+                )} */}
               </Card.Body>
             </Card>
             <EditStoriesModel
