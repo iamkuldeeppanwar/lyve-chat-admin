@@ -25,15 +25,15 @@ export default function UpdateProfileModel(props) {
     error: "",
   });
 
-  // console.log(userInfo.gender);
+  // console.log(userInfo.mobile_no);
 
   useEffect(() => {
     if (userInfo.username) {
       setUsername(userInfo.username);
-      setCountry(userInfo.country);
+      setCountry(userInfo?.country && userInfo.country);
       setGender(userInfo.gender);
       setDob(userInfo.dob !== null ? userInfo.dob : "");
-      setMobileNo(userInfo.mobile_no);
+      setMobileNo(userInfo?.mobile_no && userInfo.mobile_no);
     }
   }, [userInfo]);
 
@@ -56,36 +56,19 @@ export default function UpdateProfileModel(props) {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       dispatch({ type: "FETCH_REQUEST" });
-
-  //       const { data } = await axiosInstance.get("/api/user/user-profile", {
-  //         headers: { authorization: `Bearer ${token}` },
-  //       });
-
-  //       const user = data.user;
-
-  //       setFirstname(user.firstname);
-  //       setLastname(user.lastname);
-  //       // setFax(user.fax);
-  //       setMobileNo(user.mobile_no);
-
-  //       dispatch({ type: "FETCH_SUCCESS" });
-  //     } catch (err) {
-  //       dispatch({
-  //         type: "FETCH_FAIL",
-  //         payload: getError(err),
-  //       });
-  //       toast.error(getError(error), {
-  //         position: toast.POSITION.BOTTOM_CENTER,
-  //       });
-  //     }
-  //   };
-  //   if(token)
-  //   fetchData();
-  // }, [token, props.show]);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    // Check if the value is a valid number and has a length of 10 digits
+    if (/^\d{0,10}$/.test(value)) {
+      setMobileNo(value);
+      // if (value.length === 10) {
+      //   console.log("Valid mobile number:", value);
+      // }
+    }
+    // else {
+    //   toast.error("Mobile number must be exactly 10 digits");
+    // }
+  };
 
   const resetForm = () => {
     setUsername("");
@@ -171,28 +154,23 @@ export default function UpdateProfileModel(props) {
       </Modal.Header>
       <Form onSubmit={submitHandler}>
         <Modal.Body>
-          <Container
-          // className="small-container p-3"
-          // style={{ backgroundColor: "#f4f6f9" }}
-          >
-            {/* <img
-            src={preview}
-            alt={"profile_img"}
-            style={{ width: "200px", height: "200px" }}
-          /> */}
+          <Container>
             <Form.Group className="mb-3" controlId="firstname">
               <Form.Label>User Name</Form.Label>
               <Form.Control
                 value={username}
                 minLength={4}
+                maxLength={15}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="mobile_no">
               <Form.Label>Mobile</Form.Label>
               <Form.Control
+                type="tel"
                 value={mobile_no}
-                onChange={(e) => setMobileNo(e.target.value)}
+                onChange={handleChange}
+                placeholder="Enter 10-digit mobile number"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="name">
@@ -202,7 +180,9 @@ export default function UpdateProfileModel(props) {
             <Form.Group className="mb-3" controlId="mobile_no">
               <Form.Label>Country</Form.Label>
               <Form.Control
+                type="text"
                 value={country}
+                maxLength={4}
                 onChange={(e) => setCountry(e.target.value)}
               />
             </Form.Group>
